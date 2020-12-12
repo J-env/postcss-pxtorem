@@ -1,7 +1,5 @@
 # postcss-pxtorem-pro
 
-## [@see](https://badge.fury.io/js/postcss-pxtorem.svg)](http://badge.fury.io/js/postcss-pxtorem)
-
 A plugin for [PostCSS](https://github.com/ai/postcss) that generates rem units from pixel units.
 
 The code fork for [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem)，just modify little.
