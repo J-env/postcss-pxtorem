@@ -93,6 +93,31 @@ Config:
 }
 ```
 
+```css
+/* test.css */
+.test {
+  margin: 10px;
+  /* @pxtorem-ignore */
+  padding: 10px;
+  font-size: 12px;
+}
+
+/* test.s?css */
+.test {
+  margin: 10px;
+  /*! @pxtorem-ignore */
+  padding: 10px;
+  font-size: 12px;
+}
+
+// output
+.test {
+  margin: 0.1rem;
+  padding: 10px;
+  font-size: 12px;
+}
+```
+
 - `rootValue` (Number | Function) Represents the root element font size or returns the root element font size based on the [`input`](https://api.postcss.org/Input.html) parameter
 - `unitPrecision` (Number) The decimal numbers to allow the REM units to grow to.
 - `propList` (Array) The properties that can change from px to rem.
