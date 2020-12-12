@@ -1,11 +1,13 @@
-# postcss-pxtorem [![NPM version](https://badge.fury.io/js/postcss-pxtorem.svg)](http://badge.fury.io/js/postcss-pxtorem)
+# postcss-pxtorem-pro [@see](https://badge.fury.io/js/postcss-pxtorem.svg)](http://badge.fury.io/js/postcss-pxtorem)
 
 A plugin for [PostCSS](https://github.com/ai/postcss) that generates rem units from pixel units.
+
+The code fork for [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem)，just modify little.
 
 ## Install
 
 ```shell
-$ npm install postcss-pxtorem --save-dev
+$ npm install postcss-pxtorem-pro --save-dev
 ```
 
 ## Usage
@@ -68,7 +70,26 @@ Default:
     replace: true,
     mediaQuery: false,
     minPixelValue: 0,
+    commentIgnore: '@pxtorem-ignore',
+    ignoreFn: null,
     exclude: /node_modules/i
+}
+```
+
+Config:
+```js
+{
+  // 1rem=100px
+  rootValue: 100,
+  unitPrecision: 2, 
+  propList: ['*'], 
+  selectorBlackList: [/^html$/],
+  mediaQuery: false, 
+  minPixelValue: 2, 
+  /* @pxtorem-ignore */
+  commentIgnore: '@pxtorem-ignore',
+  ignoreFn: (str) => /font-size:\s?12px/i.test(str),
+  exclude: /node_modules/i
 }
 ```
 
@@ -120,20 +141,4 @@ gulp.task('css', function () {
         .pipe(postcss(processors))
         .pipe(gulp.dest('build/css'));
 });
-```
-
-### A message about ignoring properties
-Currently, the easiest way to have a single property ignored is to use a capital in the pixel unit declaration.
-
-```css
-// `px` is converted to `rem`
-.convert {
-    font-size: 16px; // converted to 1rem
-}
-
-// `Px` or `PX` is ignored by `postcss-pxtorem` but still accepted by browsers
-.ignore {
-    border: 1Px solid; // ignored
-    border-width: 2PX; // ignored
-}
 ```

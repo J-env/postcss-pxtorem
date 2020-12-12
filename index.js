@@ -11,7 +11,9 @@ const defaults = {
   replace: true,
   mediaQuery: false,
   minPixelValue: 0,
-  exclude: null
+  exclude: null,
+  commentIgnore: "@pxtorem-ignore",
+  ignoreFn: null
 };
 
 const legacyOptions = {
@@ -23,7 +25,7 @@ const legacyOptions = {
   propWhiteList: "propList"
 };
 
-module.exports = postcss.plugin("postcss-pxtorem", options => {
+module.exports = postcss.plugin("postcss-pxtorem-pro", options => {
   convertLegacyOptions(options);
   const opts = Object.assign({}, defaults, options);
   const satisfyPropList = createPropListMatcher(opts.propList);
@@ -50,6 +52,12 @@ module.exports = postcss.plugin("postcss-pxtorem", options => {
       opts.minPixelValue
     );
 
+    // /@pxtorem-ignore\s*\*\/$/
+    const commentIgnoreReg = new RegExp(
+      `${opts.commentIgnore}\\s*\\*\\/$`,
+      "i"
+    );
+
     css.walkDecls((decl, i) => {
       if (
         decl.value.indexOf("px") === -1 ||
@@ -57,6 +65,15 @@ module.exports = postcss.plugin("postcss-pxtorem", options => {
         blacklistedSelector(opts.selectorBlackList, decl.parent.selector)
       )
         return;
+
+      if (opts.ignoreFn && opts.ignoreFn(`${decl.prop}:${decl.value}`)) {
+        return;
+      }
+
+      const s_end = decl.source.start.offset - decl.raws.before.length;
+      if (commentIgnoreReg.test(decl.source.input.css.slice(0, s_end))) {
+        return;
+      }
 
       const value = decl.value.replace(pxRegex, pxReplace);
 
