@@ -6,9 +6,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:J-env/postcss-pxtorem.git"
+    "url": "git+ssh://git@github.com/J-env/postcss-pxtorem.git"
   },
-  "bugs": "https://github.com/J-env/postcss-pxtorem/issues",
+  "bugs": {
+    "url": "https://github.com/J-env/postcss-pxtorem/issues"
+  },
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
@@ -42,5 +44,10 @@
   ],
   "dependencies": {
     "postcss": "^7.0.27"
+  },
+  "homepage": "https://github.com/J-env/postcss-pxtorem#readme",
+  "directories": {
+    "example": "example",
+    "lib": "lib"
   }
 }
