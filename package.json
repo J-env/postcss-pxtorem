@@ -1,12 +1,12 @@
 {
   "name": "postcss-pxtorem-pro",
   "description": "A CSS post-processor that converts px to rem.",
-  "version": "5.1.2",
+  "version": "5.1.3",
   "author": "cuth",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/J-env/postcss-pxtorem.git"
+    "url": "git+https://github.com/J-env/postcss-pxtorem.git"
   },
   "bugs": {
     "url": "https://github.com/J-env/postcss-pxtorem/issues"
